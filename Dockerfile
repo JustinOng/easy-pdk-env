@@ -2,7 +2,7 @@ FROM ubuntu:focal AS build
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    subversion build-essential libboost-all-dev bison flex texinfo ca-certificates unzip \
+  subversion build-essential libboost-all-dev bison flex texinfo ca-certificates unzip \
   && rm -rf /var/lib/apt/lists/*
 
 ARG SDCC_SVN_REVISION=12752
@@ -19,3 +19,7 @@ RUN unzip EASYPDKPROG_LINUX_${EASY_PDK_VER}.zip
 FROM ubuntu:focal
 COPY --from=build /sdcc/sdcc/bin /usr/local/sbin/
 COPY --from=build /EASYPDKPROG/easypdkprog /usr/local/sbin/
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  make \
+  && rm -rf /var/lib/apt/lists/*
