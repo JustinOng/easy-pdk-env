@@ -17,9 +17,12 @@ ADD https://github.com/free-pdk/easy-pdk-programmer-software/releases/download/1
 RUN unzip EASYPDKPROG_LINUX_${EASY_PDK_VER}.zip
 
 FROM ubuntu:focal
-COPY --from=build /sdcc/sdcc/bin /usr/local/sbin/
-COPY --from=build /EASYPDKPROG/easypdkprog /usr/local/sbin/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   make \
   && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /sdcc/sdcc/ /opt/sdcc/
+COPY --from=build /EASYPDKPROG/easypdkprog /usr/local/sbin/
+
+ENV PATH "$PATH:/opt/sdcc/bin"
