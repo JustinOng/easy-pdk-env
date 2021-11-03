@@ -19,7 +19,7 @@ RUN unzip EASYPDKPROG_LINUX_${EASY_PDK_VER}.zip
 FROM ubuntu:focal
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  make \
+  make gawk\
   && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /sdcc/sdcc/ /opt/sdcc/
