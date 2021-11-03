@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ARG SDCC_SVN_REVISION=12752
 ARG EASY_PDK_VER=20200713_1.3
 
-RUN svn checkout -r 12748 svn://svn.code.sf.net/p/sdcc/code/trunk sdcc
+RUN svn checkout -r ${SDCC_SVN_REVISION} svn://svn.code.sf.net/p/sdcc/code/trunk sdcc
 RUN cd sdcc/sdcc && \
   ./configure --disable-ds390-port --disable-ds400-port --disable-hc08-port --disable-s08-port --disable-mcs51-port --disable-pic14-port --disable-pic16-port --disable-z80-port --disable-z180-port --disable-r2k-port --disable-r2ka-port --disable-r3ka-port --disable-gbz80-port --disable-tlcs90-port --disable-ez80_z80-port --disable-z80n-port --disable-stm8-port &&\
   make && make install
