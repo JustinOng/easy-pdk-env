@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   make gawk\
   && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /sdcc/sdcc/ /opt/sdcc/
+COPY --from=build /usr/local/bin/* /usr/local/bin/
+COPY --from=build /usr/local/share/sdcc/ /usr/local/share/sdcc/
 COPY --from=build /EASYPDKPROG/easypdkprog /usr/local/sbin/
-
-ENV PATH "$PATH:/opt/sdcc/bin"
